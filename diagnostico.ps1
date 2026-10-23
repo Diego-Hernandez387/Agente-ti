@@ -51,7 +51,7 @@ $IcoPath = Join-Path $env:AGENTE_DIR "asistente-ti.ico"
 # ############################################################
 #  CENTRALIZADOR (Fase 1) - deja CentralUrl vacio para desactivarlo
 # ############################################################
-$AgentVersion = "1.2.0"                     # version de este Agente
+$AgentVersion = "1.3.0"                     # version de este Agente
 $CentralUrl   = "https://agente-ti-centralizador.diego-hernandez.workers.dev"                          # ej. https://agente-ti-centralizador.TUSUB.workers.dev
 $ApiKey       = "a553e683916c4f708fba3fabd515f32036a2899c8a424483b0279c8b692c1ac2"              # clave de flota (igual a la del Worker)
 $HmacSecret   = "aacb2bb192ba4aeb97688c8e5f61d9d880c21bbb2e12469c9d3b4874ffc7c1a0"          # clave para firmar el cuerpo del reporte
@@ -206,7 +206,7 @@ function Enviar-Central($accion, $resultado, $detalle=""){
     $payload = @{
         device_id = $DeviceId; equipo = $env:COMPUTERNAME; usuario = $env:USERNAME
         alianza = $Alianza; version = $AgentVersion
-        accion = $accion; resultado = $resultado; ts = (Get-Date).ToString("o")
+            accion = $accion; resultado = $resultado; detalle = $detalle; ts = (Get-Date).ToString("o")
     } | ConvertTo-Json -Compress
     $enviado = $false
     try {
